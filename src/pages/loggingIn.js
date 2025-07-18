@@ -1,7 +1,6 @@
 // pages/loggingIn.js
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SpinnerCircular } from 'react-loader-spinner';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 //this is the page that appears before the dasboard appears
