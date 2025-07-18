@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; //icons of eye
 import './auth.css';
 
 const  Login = () => {
     const navigate = useNavigate();
     const [form, setForm] = useState({email:'', password:''});
+    const [showPassword, setShowPassword] = useState(false); // to change state of password
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,7 +52,21 @@ const  Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required /><br />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required /><br />
+<div className="password-wrapper">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"} // 👈 toggle type
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)} // 👈 toggle logic
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         <button type="submit">Login</button>
         <span>Don't have an account ? <Link to="/register"> Sign Up</Link></span>
       </form>

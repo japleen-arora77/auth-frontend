@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; //icons of eye
 import './auth.css';
 
 const  Register = () => {
   const navigate = useNavigate();
     const [form, setForm] = useState({name:'', email:'', password:''});
+    const [showPassword, setShowPassword] = useState(false); // to change state of password
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -64,12 +65,25 @@ const  Register = () => {
       <form onSubmit={handleSubmit}>
         <input name="name" placeholder="Name" onChange={handleChange} required /><br />
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required /><br />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required /><br />
+        <div className="password-wrapper">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"} // 👈 toggle type
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)} // 👈 toggle logic
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         <button type="submit">Sign Up</button>
         <span>Already have an account ? <Link to="/login"> Login</Link></span>
       </form>
       </div>
-      <ToastContainer />
     </div>
     );
 
