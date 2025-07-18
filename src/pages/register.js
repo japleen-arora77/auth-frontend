@@ -36,7 +36,8 @@ const  Register = () => {
                   localStorage.setItem("token", loginData.token);
                   localStorage.setItem("userInfo", JSON.stringify(loginData.user));
                   alert("Registration successful! Logged in.");
-                  navigate("/dashboard");
+                  navigate("/loggingin");
+                  //navigate("/dashboard");
                 } else {
                   alert("Registration success, but login failed. Please login manually.");
                   navigate("/login");
