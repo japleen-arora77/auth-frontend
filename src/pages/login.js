@@ -30,13 +30,14 @@ const  Login = () => {
                 localStorage.setItem("token", data.token);
                 // ✅ Store user info (optional: depends on what backend sends)
                 localStorage.setItem("userInfo", JSON.stringify(data.user)); // assuming data.user has email and name
-                alert("Login Successful");
+                //alert("Login Successful");
+                console.log("login successful");
                 navigate("/loggingin");
                 //navigate("/dashboard");// Redirect to home page or dashboard
             } else {
         //toast.error(data.message || "Login failed");
                 console.error("❌ Login failed ", data);
-                alert("login failed!");
+                //alert("login failed!");
             }
         }
         catch (err) {

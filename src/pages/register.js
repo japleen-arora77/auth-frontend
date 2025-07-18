@@ -25,7 +25,7 @@ const  Register = () => {
           const data = await res.json();
           if (res.ok) {
             console.log("✅ Registration successful:", data);
-            alert(" Registration successful");
+            //alert(" Registration successful");
                   // ✅ Auto-login immediately
                 const loginRes = await fetch("https://auth-backend-setp.onrender.com/api/login", {
                   method: "POST",
@@ -36,18 +36,20 @@ const  Register = () => {
                 if (loginRes.ok) {
                   localStorage.setItem("token", loginData.token);
                   localStorage.setItem("userInfo", JSON.stringify(loginData.user));
-                  alert("Registration successful! Logged in.");
+                  //alert("Registration successful! Logged in.");
+                  console.log("registration Successful");
                   navigate("/loggingin");
                   //navigate("/dashboard");
                 } else {
-                  alert("Registration success, but login failed. Please login manually.");
+                  //alert("Registration success, but login failed. Please login manually.");
+                  console.log("Registration success but fail login");
                   navigate("/login");
                 }
 
             //toast.success("Registration successful!");
           } else {
             console.error("❌ Registration failed:", data);
-            alert(`❌ Registration Failed: ${data.message || "Invalid data"}`);
+            //alert(`❌ Registration Failed: ${data.message || "Invalid data"}`);
             //toast.error(data.message || "Registration failed");
           }
         } catch (err) {
