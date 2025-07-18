@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import './auth.css';
 
 const  Login = () => {
@@ -28,7 +29,8 @@ const  Login = () => {
                 // ✅ Store user info (optional: depends on what backend sends)
                 localStorage.setItem("userInfo", JSON.stringify(data.user)); // assuming data.user has email and name
                 alert("Login Successful");
-                navigate("/dashboard");// Redirect to home page or dashboard
+                navigate("/loggingin");
+                //navigate("/dashboard");// Redirect to home page or dashboard
             } else {
         //toast.error(data.message || "Login failed");
                 console.error("❌ Login failed ", data);
@@ -50,6 +52,7 @@ const  Login = () => {
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required /><br />
         <input name="password" type="password" placeholder="Password" onChange={handleChange} required /><br />
         <button type="submit">Login</button>
+        <span>Don't have an account ? <Link to="/register"> Sign Up</Link></span>
       </form>
       </div>
     </div>

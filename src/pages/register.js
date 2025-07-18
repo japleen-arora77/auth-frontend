@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify'
 import './auth.css';
 
 const  Register = () => {
+  const navigate = useNavigate();
     const [form, setForm] = useState({name:'', email:'', password:''});
 
     const handleChange = (e) => {
@@ -23,6 +25,23 @@ const  Register = () => {
           if (res.ok) {
             console.log("✅ Registration successful:", data);
             alert(" Registration successful");
+                  // ✅ Auto-login immediately
+                const loginRes = await fetch("https://auth-backend-setp.onrender.com/api/login", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email: form.email, password: form.password }),
+                });
+                const loginData = await loginRes.json();
+                if (loginRes.ok) {
+                  localStorage.setItem("token", loginData.token);
+                  localStorage.setItem("userInfo", JSON.stringify(loginData.user));
+                  alert("Registration successful! Logged in.");
+                  navigate("/dashboard");
+                } else {
+                  alert("Registration success, but login failed. Please login manually.");
+                  navigate("/login");
+                }
+
             //toast.success("Registration successful!");
           } else {
             console.error("❌ Registration failed:", data);
@@ -46,7 +65,7 @@ const  Register = () => {
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required /><br />
         <input name="password" type="password" placeholder="Password" onChange={handleChange} required /><br />
         <button type="submit">Sign Up</button>
-        <span>Already have an account ?<Link to="/login">Login</Link></span>
+        <span>Already have an account ? <Link to="/login"> Login</Link></span>
       </form>
       </div>
       <ToastContainer />
